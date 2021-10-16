@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-app
+  template:
+    metadata:
+      name: hello-blue-pod
+      labels:
+        app: hello-app
+        version: blue
+    spec:
+      containers:
+      - name: hello-container
+        image: hoibui/techconserviceb:version1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: dockerhub
